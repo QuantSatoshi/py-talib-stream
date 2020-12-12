@@ -1,6 +1,6 @@
 import pyslidingwindow
 
-from mlprelude.modules.sma_keeper import SmaKeeper
+from .sma_keeper import SmaKeeper
 
 
 class StdKeeper:
