@@ -9,7 +9,7 @@ class TestEmaKeeper(unittest.TestCase):
 
     def test_add(self):
         self.ema_keeper.add(1)
-        self.assertEqual(self.ema_keeper.ema, 0)
+        self.assertEqual(self.ema_keeper.ema, 1)
         self.ema_keeper.add(2)
         self.ema_keeper.add(3)
         self.assertEqual(self.ema_keeper.ema, 2)

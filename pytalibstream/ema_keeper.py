@@ -7,9 +7,7 @@ class EmaKeeper:
         self._ema = 0
 
     def add(self, value: float):
-        if self.arr.length() + 1 < self.arr.max_len():
-            self.arr.push(value)
-        elif self.arr.length() + 1 == self.arr.max_len():
+        if self.arr.length() < self.arr.max_len():
             self.arr.push(value)
             self._ema = sum(self.arr) / self.arr.length()
         else:
