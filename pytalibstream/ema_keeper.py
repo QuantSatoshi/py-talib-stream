@@ -7,22 +7,19 @@ class EmaKeeper:
         self._ema = 0
 
     def add(self, value: float):
-        if self.arr.length() < self.arr.max_len():
+        if self.arr.length() + 1 < self.arr.max_len():
             self.arr.push(value)
-            if self.arr.length() == self.arr.max_len():
-                self.ema = sum(self.arr)/self.arr.length()
+        elif self.arr.length() + 1 == self.arr.max_len():
+            self.arr.push(value)
+            self._ema = sum(self.arr) / self.arr.length()
         else:
-            self.ema = self.get_ema(self.arr.max_len(), value, self.ema)
+            self._ema = self.get_ema(self.arr.max_len(), value, self.ema)
 
         return self.ema
 
     @property
     def ema(self):
         return self._ema
-
-    @ema.setter
-    def ema(self, new_ema):
-        self._ema = new_ema
 
     @staticmethod
     def get_ema(max_length: int, value: float, ema: float):

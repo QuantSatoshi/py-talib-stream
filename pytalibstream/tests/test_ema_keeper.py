@@ -4,7 +4,6 @@ from pytalibstream.ema_keeper import EmaKeeper
 
 
 class TestEmaKeeper(unittest.TestCase):
-
     def setUp(self) -> None:
         self.ema_keeper = EmaKeeper(3)
 
