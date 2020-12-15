@@ -39,11 +39,3 @@ class MacdKeeper:
             'macdSignal': self.signal_ema_keeper.ema,
             'histogram': macd - self.signal_ema_keeper.ema
         }
-
-macd_keeper = MacdKeeper(12, 26, 9)
-sample = range(1, 101)
-
-for i in sample:
-    macd_keeper.add(i)
-
-print(macd_keeper.macd)
