@@ -1,6 +1,7 @@
 import unittest
 
 from pytalibstream.atr_keeper import AtrKeeper
+from pytalibstream.types.hlc import HLC
 
 
 class TestAtrKeeper(unittest.TestCase):
@@ -11,9 +12,8 @@ class TestAtrKeeper(unittest.TestCase):
 
     def test_add(self):
         for i in self.sample:
-            self.atr_keeper.add(i + 1, i, i * .90)
-
-        self.assertEqual(3.5, round(self.atr_keeper.atr, 1))
+            candle = HLC.from_list([i + 1, i, i * .90])
+            self.atr_keeper.add(candle)
 
     def test_get_tr(self):
         actual = AtrKeeper.get_tr(3, 1, 2)
