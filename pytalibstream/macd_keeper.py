@@ -9,10 +9,16 @@ class MacdKeeper:
 
         if self.slow_period < self.fast_period:
             raise Exception(
-                "slowPeriod {} cannot be smaller than fastPeriod {}".format(self.slow_period, self.fast_period))
+                "slowPeriod {} cannot be smaller than fastPeriod {}".format(
+                    self.slow_period, self.fast_period
+                )
+            )
         if self.fast_period < self.signal_period:
             raise Exception(
-                "fastPeriod {} cannot be smaller than signalPeriod {}".format(self.fast_period, self.signal_period))
+                "fastPeriod {} cannot be smaller than signalPeriod {}".format(
+                    self.fast_period, self.signal_period
+                )
+            )
 
         self.slow_ema_keeper = EmaKeeper(self.slow_period)
         self.fast_ema_keeper = EmaKeeper(self.fast_period)
@@ -33,9 +39,13 @@ class MacdKeeper:
 
     @property
     def macd(self):
-        macd = self._macd if self.data_count >= self.slow_period + self.signal_period - 1 else 0
+        macd = (
+            self._macd
+            if self.data_count >= self.slow_period + self.signal_period - 1
+            else 0
+        )
         return {
-            'macd': macd,
-            'macdSignal': self.signal_ema_keeper.ema,
-            'histogram': macd - self.signal_ema_keeper.ema
+            "macd": macd,
+            "macdSignal": self.signal_ema_keeper.ema,
+            "histogram": macd - self.signal_ema_keeper.ema,
         }
