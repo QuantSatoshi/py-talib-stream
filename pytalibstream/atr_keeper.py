@@ -1,5 +1,4 @@
 import pyslidingwindow
-from pytalibstream.types.hlc import HLC
 
 
 class AtrKeeper:
@@ -15,14 +14,15 @@ class AtrKeeper:
         self.max_len = max_len
         self.prev_tr = []
 
-    def add(self, candle: HLC):
+    def add(self, high: float, low: float, close: float):
         self.data_count += 1
-        self.high.push(candle.high)
-        self.low.push(candle.low)
-        self.close.push(candle.close)
+        self.high.push(high)
+        self.low.push(low)
+        self.close.push(close)
 
-        if self.max_len + 1 > self.data_count > 1:
-            self.prev_tr.append(self.calc_tr())
+        if self.data_count < self.max_len + 1:
+            if self.data_count > 1:
+                self.prev_tr.append(self.calc_tr())
         elif self.data_count == self.max_len + 1:
             self._atr = sum(self.prev_tr) / len(self.prev_tr)
             self._atr = (self._atr * (self.max_len - 1) + self.calc_tr()) / self.max_len
