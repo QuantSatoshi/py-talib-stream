@@ -40,3 +40,7 @@ class AtrKeeper:
     @property
     def atr(self):
         return self._atr
+    
+    @property
+    def get(self):
+        return self._atr
