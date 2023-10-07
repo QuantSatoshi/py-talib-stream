@@ -3,13 +3,15 @@ from .ema_keeper import EmaKeeper
 from .std_keeper import StdKeeper
 from .atr_keeper import AtrKeeper
 from .macd_keeper import MacdKeeper
+from .max_min_keeper import MaxMinKeeper
 
 __all__ = [
     "SmaKeeper",
     "EmaKeeper",
     "StdKeeper",
     "AtrKeeper",
-    "MacdKeeper"
+    "MacdKeeper",
+    "MaxMinKeeper"
 ]
 
 __title__ = "pytalibstream"
