@@ -1,6 +1,8 @@
 import unittest
+
 import numpy as np
 import talib
+
 from pytalibstream.atr_keeper import AtrKeeper
 
 
