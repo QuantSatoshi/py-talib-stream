@@ -37,8 +37,7 @@ class MacdKeeper:
             self._macd = self.fast_ema_keeper.ema - self.slow_ema_keeper.ema
             self.signal_ema_keeper.add(self._macd)
 
-    @property
-    def macd(self):
+    def get(self):
         macd = (
             self._macd
             if self.data_count >= self.slow_period + self.signal_period - 1

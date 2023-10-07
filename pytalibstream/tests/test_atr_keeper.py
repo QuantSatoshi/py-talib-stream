@@ -22,7 +22,7 @@ class TestAtrKeeper(unittest.TestCase):
 
             if i > 20:
                 self.assertTrue(
-                    abs(self.atr_keeper.atr - atr_ta[i]) < 0.0001
+                    abs(self.atr_keeper.get() - atr_ta[i]) < 0.0001
                 )
 
     def test_get_tr(self):

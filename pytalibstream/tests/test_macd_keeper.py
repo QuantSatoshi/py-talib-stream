@@ -27,7 +27,7 @@ class TestMacdKeeper(unittest.TestCase):
             # over a longer term, the macd will get close
             if i > 33:
                 self.assertTrue(
-                    abs(self.macd_keeper.macd["macd"] - macd_ta[0][i]) < 0.0001
+                    abs(self.macd_keeper.get()["macd"] - macd_ta[0][i]) < 0.0001
                 )
 
 
