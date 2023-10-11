@@ -1,3 +1,4 @@
+import pickle
 import unittest
 
 import numpy as np
@@ -28,3 +29,25 @@ class TestAtrKeeper(unittest.TestCase):
     def test_get_tr(self):
         actual = AtrKeeper.get_tr(3, 1, 2)
         self.assertEqual(2, actual)
+
+    def test_pickle_dump(self):
+        for i in range(0, len(self.sample)):
+            self.atr_keeper.add(self.sample[i, :][0], self.sample[i, :][1], self.sample[i, :][2])
+        # Serialize the instance to a file
+   
+        with open('atr_keeper.pickle', 'wb') as file:
+            pickle.dump(self.atr_keeper, file)
+
+        # Deserialize the instance from the file
+        with open('atr_keeper.pickle', 'rb') as file:
+            loaded_atr_keeper = pickle.load(file)
+            self.assertEqual(loaded_atr_keeper.get(), self.atr_keeper.get())
+            self.assertEqual(loaded_atr_keeper.high.first(), self.atr_keeper.high.first())
+            self.assertEqual(loaded_atr_keeper.high.last(), self.atr_keeper.high.last())
+            self.assertEqual(loaded_atr_keeper.high.length(), self.atr_keeper.high.length())
+            self.assertEqual(loaded_atr_keeper.low.first(), self.atr_keeper.low.first())
+            self.assertEqual(loaded_atr_keeper.low.last(), self.atr_keeper.low.last())
+            self.assertEqual(loaded_atr_keeper.close.first(), self.atr_keeper.close.first())
+            self.assertEqual(loaded_atr_keeper.close.last(), self.atr_keeper.close.last())
+
+    

@@ -4,11 +4,17 @@ import pyslidingwindow
 
 
 class MaxMinKeeper:
-    def __init__(self, max_len: int):
+    def __init__(self, max_len: int, max_arr = deque(), min_arr = deque(), window_values = None):
         self.arr = pyslidingwindow.SlidingWindowFloat(max_len)
-        self.max_arr = deque()
-        self.min_arr = deque()
+        self.max_arr = max_arr
+        self.min_arr = min_arr
+        if window_values is not None:
+            for v in window_values:
+                self.arr.push(v)
 
+    def __reduce__(self):
+        return (self.__class__, (self.arr.max_len(), self.max_arr, self.min_arr, self.arr.raw()))
+    
     def add_tail(self, value: float):
         while len(self.min_arr) > 0 and value < self.min_arr[-1]:
             self.min_arr.pop()

@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="pytalibstream",
-    version="0.0.4",
+    version="0.0.5",
     description="QS private package",
     url="git@github.com:QuantSatoshi/py-talib-stream.git",
     author="Hao Wang",

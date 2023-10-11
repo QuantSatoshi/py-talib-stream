@@ -1,3 +1,4 @@
+import pickle
 import unittest
 
 from pytalibstream.ema_keeper import EmaKeeper
@@ -18,3 +19,18 @@ class TestEmaKeeper(unittest.TestCase):
         for i in range(1, 5):
             self.ema_keeper.add(i)
         self.assertEqual(self.ema_keeper.ema, 3)
+        
+    def test_pickle_dump(self):
+        self.ema_keeper.add(1)
+        self.ema_keeper.add(2)
+        self.ema_keeper.add(3)
+
+        # Serialize the instance to a file
+   
+        with open('ema_keeper.pickle', 'wb') as file:
+            pickle.dump(self.ema_keeper, file)
+
+        # Deserialize the instance from the file
+        with open('ema_keeper.pickle', 'rb') as file:
+            loaded_sma_keeper = pickle.load(file)
+            self.assertEqual(loaded_sma_keeper.get(), self.ema_keeper.get())

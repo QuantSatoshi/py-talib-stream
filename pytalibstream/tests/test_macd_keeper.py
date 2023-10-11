@@ -1,4 +1,5 @@
 import math
+import pickle
 import unittest
 
 import numpy as np
@@ -30,6 +31,22 @@ class TestMacdKeeper(unittest.TestCase):
                     abs(self.macd_keeper.get()["macd"] - macd_ta[0][i]) < 0.0001
                 )
 
+    def test_pickle_dump(self):
+        for i in range(1, 101):
+            self.sample.append(float(math.log(i)))
+
+        # Serialize the instance to a file
+   
+        with open('macd_keeper.pickle', 'wb') as file:
+            pickle.dump(self.macd_keeper, file)
+
+        # Deserialize the instance from the file
+        with open('macd_keeper.pickle', 'rb') as file:
+            loaded_macd_keeper = pickle.load(file)
+            self.assertEqual(loaded_macd_keeper.get(), self.macd_keeper.get())
+            self.assertEqual(loaded_macd_keeper.slow_ema_keeper.get(), self.macd_keeper.slow_ema_keeper.get())
+            self.assertEqual(loaded_macd_keeper.signal_ema_keeper.get(), self.macd_keeper.signal_ema_keeper.get())
+            self.assertEqual(loaded_macd_keeper.data_count, self.macd_keeper.data_count)
 
 if __name__ == "__main__":
     unittest.main()
